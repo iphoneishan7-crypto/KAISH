@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAISH | Premium Clothing</title>
+    <meta name="description" content="KAISH. Created With Care, Delivered With Thanks. Premium clothing, thoughtfully delivered.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Embedded CSS for a single, fast-loading file -->
+    <style>
+      /* 
+       * CSS STYLES FOR KAISH STOREFRONT
+       * - Mobile-first design approach
+       * - Uses CSS variables for easy theme editing
+       * - Clean, readable, and commented
+      */
+
+      /* 1. CSS Variables and Global Styles */
+      :root {
+        --bg-color: #121212;
+        --text-color: #e5e5e5;
+        --text-color-muted: #a0a0a0;
+        --surface-color: #1a1a1a;
+        --brand-font: 'Playfair Display', serif;
+        --body-font: 'Inter', sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: var(--body-font);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      /* 2. Navigation Bar */
+      .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+      }
+      .navbar.scrolled {
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+      }
+      .brand-logo {
+        font-family: var(--brand-font);
+        font-size: 2rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: white;
+        letter-spacing: 0.1em;
+      }
+      .nav-links {
+        display: none; /* Hidden on mobile */
+        list-style: none;
+        gap: 2rem;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-color-muted);
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+      .nav-links a:hover {
+        color: white;
+      }
+      .hamburger-menu {
+        display: block; /* Shown on mobile */
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+      }
+      .hamburger-menu .bar {
+        display: block;
+        width: 25px;
+        height: 2px;
+        margin: 5px auto;
+        background-color: white;
+        transition: all 0.3s ease-in-out;
+      }
+      .mobile-nav {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 1rem;
+        text-align: center;
+      }
+      .mobile-nav.open {
+        display: flex;
+      }
+      .mobile-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+      }
+
+      /* 3. Hero Section */
+      .hero {
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        padding: 1rem;
+      }
+      .hero-bg-eagle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90%;
+        max-width: 400px;
+        z-index: 0;
+        user-select: none;
+        pointer-events: none;
+        /* Animation properties */
+        opacity: 0;
+        animation: watermark-intro 2.5s 0.5s ease-out forwards;
+      }
+      .hero-content {
+        z-index: 1;
+        animation: content-fade-in 1.5s 0.5s ease-out forwards;
+        opacity: 0;
+      }
+      .hero h1 {
+        font-family: var(--brand-font);
+        font-size: 4rem;
+        letter-spacing: 0.2em;
+        font-weight: 800;
+      }
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--text-color-muted);
+        letter-spacing: 0.05em;
+        margin-top: 1rem;
+      }
+      .cta-buttons {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 300px;
+      }
+      .cta-btn {
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 500;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+      .cta-btn:hover {
+        transform: scale(1.05);
+        background-color: #f0f0f0;
+      }
+
+      /* 4. Products Section */
+      .products {
+        background-color: var(--surface-color);
+        overflow: hidden;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .section-header h2 {
+        font-family: var(--brand-font);
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .section-header p {
+        color: var(--text-color-muted);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .product-carousel {
+        position: relative;
+        width: 100%;
+        cursor: grab;
+      }
+      .product-carousel:active {
+        cursor: grabbing;
+      }
+      .carousel-track {
+        display: flex;
+        will-change: transform; /* Performance hint for the browser */
+      }
+      .product-card {
+        flex-shrink: 0;
+        width: 70vw; /* Show more than one image on screen */
+        max-width: 300px;
+        margin: 0 1rem;
+        aspect-ratio: 2 / 3;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #333;
+      }
+      .product-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        pointer-events: none;
+      }
+      
+      /* 5. About & Contact Sections */
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      .contact {
+        background-color: var(--surface-color);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .contact-form .form-group {
+        margin-bottom: 1.5rem;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--bg-color);
+        border: 1px solid #333;
+        border-radius: 5px;
+        color: white;
+        font-family: var(--body-font);
+        font-size: 1rem;
+      }
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        outline: none;
+        border-color: white;
+      }
+      .contact-form button {
+        width: 100%;
+        padding: 1rem;
+        border: none;
+        border-radius: 50px;
+        background-color: white;
+        color: black;
+        font-weight: 500;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+      .contact-form button:hover {
+        transform: scale(1.02);
+      }
+      .contact-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .contact-info a {
+        color: var(--text-color-muted);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .contact-info a:hover {
+        color: white;
+      }
+      .contact-info-item {
+        margin-bottom: 2rem;
+      }
+
+      /* 6. Footer */
+      .footer {
+        background-color: black;
+        text-align: center;
+        padding: 3rem 1.5rem;
+      }
+      .footer .brand-logo {
+        font-size: 2.5rem;
+      }
+      .footer p {
+        color: var(--text-color-muted);
+        margin: 0.5rem 0 1.5rem;
+      }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .social-icons a {
+        color: var(--text-color-muted);
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      .social-icons a:hover {
+        color: white;
+        transform: scale(1.2);
+      }
+      .footer-copy {
+        margin-top: 2rem;
+        font-size: 0.8rem;
+        color: #555;
+      }
+
+      /* 7. Animations & Effects */
+      @keyframes watermark-intro {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.9) translateY(20px);
+        }
+        to {
+          opacity: 0.05;
+          transform: translate(-50%, -50%) scale(1) translateY(0);
+        }
+      }
+      @keyframes content-fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      }
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .fade-in-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* 8. Media Queries (Responsive Design) */
+      @media (min-width: 768px) {
+        section {
+          padding: 6rem 0;
+        }
+        .nav-links {
+          display: flex;
+        }
+        .hamburger-menu, .mobile-nav {
+          display: none;
+        }
+        .hero-bg-eagle {
+          max-width: 600px;
+        }
+        .hero h1 {
+          font-size: 6rem;
+        }
+        .hero p {
+          font-size: 1.5rem;
+        }
+        .cta-buttons {
+          flex-direction: row;
+          max-width: none;
+        }
+        .section-header h2 {
+          font-size: 3rem;
+        }
+        .product-card {
+          width: 25vw;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+          gap: 5rem;
+        }
+      }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+
+    <!-- 1. HEADER / NAVIGATION -->
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#home" class="brand-logo">KAISH</a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+
+        <!-- 2. HERO SECTION -->
+        <section id="home" class="hero">
+            <!-- Animated Background Watermark -->
+            <img src="/kaish-logo.png" alt="KAISH Eagle Logo" class="hero-bg-eagle">
+            
+            <div class="hero-content">
+                <h1>KAISH</h1>
+                <p>Created With Care, Delivered With Thanks</p>
+                <!-- Call-to-Action Buttons: Update href with your links -->
+                <div class="cta-buttons">
+                    <a href="#" class="cta-btn" target="_blank" rel="noopener">Buy on Amazon</a>
+                    <a href="#" class="cta-btn" target="_blank" rel="noopener">Buy on Flipkart</a>
+                    <a href="#" class="cta-btn" target="_blank" rel="noopener">Buy on Meesho</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PRODUCTS SECTION -->
+        <section id="products" class="products fade-in-section">
+            <div class="container">
+              <div class="section-header">
+                <h2>Our Collection</h2>
+                <p>Discover our range of thoughtfully designed apparel, crafted for comfort and style.</p>
+              </div>
+            </div>
+            <div class="product-carousel" id="product-carousel">
+              <!-- JS will populate the carousel track -->
+            </div>
+        </section>
+
+        <!-- 4. ABOUT US SECTION -->
+        <section id="about" class="about fade-in-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>With Care & Confidence</h2>
+                </div>
+                <div class="about-content">
+                    <p>At KAISH, we believe clothing is more than just fabric; it's a statement of care and a vessel of trust. Every piece is designed with intention and crafted from quality materials, ensuring it's not only stylish but also comfortable and lasting.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACT US SECTION -->
+        <section id="contact" class="contact fade-in-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get In Touch</h2>
+                    <p>We’d love to hear from you. Drop us a line.</p>
+                </div>
+                <div class="contact-grid">
+                    <form class="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <h3>Email Us</h3>
+                            <!-- Update with your email -->
+                            <a href="mailto:hello@kaish.com">hello@kaish.com</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <h3>Follow Us</h3>
+                            <!-- Update with your Instagram link -->
+                            <a href="#" target="_blank" rel="noopener">@kaishclothing</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <a href="#home" class="brand-logo">KAISH</a>
+            <p>Premium clothing, thoughtfully delivered.</p>
+            <div class="social-icons">
+                <!-- Update href with your social media links -->
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="#" aria-label="Twitter" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+            </div>
+            <p class="footer-copy">&copy; 2024 KAISH. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript loaded via module -->
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
